@@ -1,0 +1,373 @@
+Option Explicit
+
+Private Sub CommandButton1_Click()
+'for all 50 students make an if statement if the user selects their name from the listbox and then display exam average in a message box
+    Dim student As Double
+    If ListBox1.Value = "Syrena Endivain, 2015_1" Then
+        student = Application.WorksheetFunction.Average(Range("I2:I9"))
+        MsgBox "Syrena Endivain's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    'second student
+    If ListBox1.Value = "Kahar Donos, 2015_2" Then
+        student = Application.WorksheetFunction.Average(Range("I10:I17"))
+        MsgBox "Kahar Dono's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'third student
+     If ListBox1.Value = "Zae Kaiser, 2015_3" Then
+        student = Application.WorksheetFunction.Average(Range("I18:I25"))
+        MsgBox "Zae Kaiser's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'fourth student
+    If ListBox1.Value = "Koro Magre, 2015_4" Then
+        student = Application.WorksheetFunction.Average(Range("I26:I33"))
+        MsgBox "Koro Kaiser's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+   'fifth student
+   If ListBox1.Value = "Lenders Turon, 2015_5" Then
+        student = Application.WorksheetFunction.Average(Range("I34:I41"))
+        MsgBox "Lenders Turon's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'sixth student
+    If ListBox1.Value = "Mala Varless, 2015_6" Then
+        student = Application.WorksheetFunction.Average(Range("I42:I49"))
+        MsgBox "Marla Varless's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'seventh student
+    If ListBox1.Value = "Jag Nafeel, 2015_7" Then
+        student = Application.WorksheetFunction.Average(Range("I50:I57"))
+        MsgBox "Jag Nafeel's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'eight student
+      If ListBox1.Value = "Innoruuk Finn, 2015_8" Then
+        student = Application.WorksheetFunction.Average(Range("I58:I65"))
+        MsgBox "Innoruuk Finn's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+    
+    'ninth student
+    If ListBox1.Value = "Keever Phrog, 2015_9" Then
+        student = Application.WorksheetFunction.Average(Range("I66:I73"))
+        MsgBox "Keever Phrong's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'tenth student
+    If ListBox1.Value = "Kaarl Nooram, 2015_10" Then
+        student = Application.WorksheetFunction.Average(Range("I74:I81"))
+        MsgBox "Karl Nooram's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+
+    'eleventh student
+    If ListBox1.Value = "Tomas Pescer, 2015_11" Then
+        student = Application.WorksheetFunction.Average(Range("I82:I89"))
+        MsgBox "Tomas Pescer's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'twelveth student
+    If ListBox1.Value = "Irizon Exibil, 2015_12" Then
+        student = Application.WorksheetFunction.Average(Range("I90:I97"))
+        MsgBox "Irizon Exibil's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'thirteenth student
+    If ListBox1.Value = "Allen Bernard, 2015_13" Then
+        student = Application.WorksheetFunction.Average(Range("I98:I105"))
+        MsgBox "Allen Bernard's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'fourteenth student
+    If ListBox1.Value = "Strilath Mnaa, 2015_14" Then
+        student = Application.WorksheetFunction.Average(Range("I106:I113"))
+        MsgBox "Strilath Mnaa's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'fifteenth student
+    If ListBox1.Value = "Tomara Yavoog, 2015_15" Then
+        student = Application.WorksheetFunction.Average(Range("I114:I121"))
+        MsgBox "Tomara Yavoog's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'sixteenth student
+    If ListBox1.Value = "Adoniram Vadith, 2015_16" Then
+        student = Application.WorksheetFunction.Average(Range("I122:I129"))
+        MsgBox "Adoniram Vadith's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'seventeenth student
+    If ListBox1.Value = "Braganti Sudime, 2015_17" Then
+        student = Application.WorksheetFunction.Average(Range("I130:I137"))
+        MsgBox "Braganti Sudime's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'eighteenth student
+    If ListBox1.Value = "Oren Haruhana 2015_18" Then
+        student = Application.WorksheetFunction.Average(Range("I138:I145"))
+        MsgBox "Oren Haruhana's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'ninteenth student
+     If ListBox1.Value = "Reiko Erelen, 2015_19" Then
+        student = Application.WorksheetFunction.Average(Range("I146:I153"))
+        MsgBox "Reiko Erelen's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    'twentyth student
+    If ListBox1.Value = "Jakuu Hawkes, 2015_20" Then
+        student = Application.WorksheetFunction.Average(Range("I154:I161"))
+        MsgBox "Jakuu Hawkes Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '21 student
+    If ListBox1.Value = "Tifa Nere, 2015_21" Then
+        student = Application.WorksheetFunction.Average(Range("I162:I169"))
+        MsgBox "Tifa Nere's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '22 student
+    If ListBox1.Value = "Adan Mackali, 2015_22" Then
+        student = Application.WorksheetFunction.Average(Range("I170:I177"))
+        MsgBox "Adan Mackali's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '23 student
+    If ListBox1.Value = "Del-Nara Cardan, 2015_23" Then
+        student = Application.WorksheetFunction.Average(Range("I178:I185"))
+        MsgBox "Dela-Nara Cardan's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '24 student
+      If ListBox1.Value = "Xerda Duann, 2015_24" Then
+        student = Application.WorksheetFunction.Average(Range("I186:I193"))
+        MsgBox "Xerda Duann's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+    
+    '25 student
+    If ListBox1.Value = "Lila Bintaghr, 2015_25" Then
+        student = Application.WorksheetFunction.Average(Range("I194:I201"))
+        MsgBox "Lila Bintaghr's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '26 student
+    If ListBox1.Value = "Noah Rohtul, 2015_26" Then
+        student = Application.WorksheetFunction.Average(Range("I202:I209"))
+        MsgBox "Noah Rohtul's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '27 student
+    If ListBox1.Value = "Yiukie Eronoss, 2015_27" Then
+        student = Application.WorksheetFunction.Average(Range("I210:I217"))
+        MsgBox "Yiukie Eronoss's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '28 student
+     If ListBox1.Value = "Kai Dalgas, 2015_28" Then
+        student = Application.WorksheetFunction.Average(Range("I218:I225"))
+        MsgBox "Kai Dalgas's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '29 student
+    If ListBox1.Value = "Tobian Tarmin, 2015_29" Then
+        student = Application.WorksheetFunction.Average(Range("I226:I233"))
+        MsgBox "Tobian Tarmin's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '30 student
+    If ListBox1.Value = "Gaeton Lerann, 2015_30" Then
+        student = Application.WorksheetFunction.Average(Range("I234:I241"))
+        MsgBox "Gaeton Lerann's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '31 student
+     If ListBox1.Value = "Montross Anarth, 2015_31" Then
+        student = Application.WorksheetFunction.Average(Range("I242:I249"))
+        MsgBox "Montross Anarth's Final Exam Average for all 8 courses is " & student & "% ."
+     End If
+    
+    '32 student
+    If ListBox1.Value = "Karn Tong, 2015_32" Then
+        student = Application.WorksheetFunction.Average(Range("I250:I257"))
+        MsgBox "Karn Tong's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '33 student
+    If ListBox1.Value = "Tendra Olgad, 2015_33" Then
+        student = Application.WorksheetFunction.Average(Range("I258:I265"))
+        MsgBox "Tendra Olgad's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '34 student
+    If ListBox1.Value = "Ara Zerga, 2015_34" Then
+        student = Application.WorksheetFunction.Average(Range("I266:I273"))
+        MsgBox "Ara Zerga's Final Exam Average for all 8 courses is " & student & "% ."
+    End If
+    
+    '35 student
+      If ListBox1.Value = "Ubinaarisan Shaknaw, 2015_35" Then
+        student = Application.WorksheetFunction.Average(Range("I274:I281"))
+        MsgBox "Ubinaarisan Shaknaw's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '36 student
+      If ListBox1.Value = "Tarash Selkayim, 2015_36" Then
+        student = Application.WorksheetFunction.Average(Range("I282:I289"))
+        MsgBox "Tarash Selkayim's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '37 student
+      If ListBox1.Value = "Shivas Leqarna, 2015_37" Then
+        student = Application.WorksheetFunction.Average(Range("I290:I297"))
+        MsgBox "Shivas Leqarna's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '38 student
+      If ListBox1.Value = "Akana Morrow, 2015_38" Then
+        student = Application.WorksheetFunction.Average(Range("I298:I305"))
+        MsgBox "Akana Morrow's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '39 student
+      If ListBox1.Value = "Kristofer Kriek Kolbrun, 2015_39" Then
+        student = Application.WorksheetFunction.Average(Range("I306:I313"))
+        MsgBox "Kristofer Kriek Kolbrun's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '40 student
+      If ListBox1.Value = "Roth We, 2015_40" Then
+        student = Application.WorksheetFunction.Average(Range("I314:I321"))
+        MsgBox "Roth We's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '41 student
+       If ListBox1.Value = "Roy Starwalker, 2015_41" Then
+        student = Application.WorksheetFunction.Average(Range("I322:I329"))
+        MsgBox "Roy Starwalker's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '42 student
+       If ListBox1.Value = "Dorn Shysha, 2015_42" Then
+        student = Application.WorksheetFunction.Average(Range("I330:I337"))
+        MsgBox "Dorn Shysha's Final Exam Average for all 8 courses is " & student & "% ."
+       End If
+      
+      '43 student
+       If ListBox1.Value = "Karva Shapris, 2015_43" Then
+        student = Application.WorksheetFunction.Average(Range("I338:I345"))
+        MsgBox "Karva Shapris's Final Exam Average for all 8 courses is " & student & "% ."
+       End If
+      
+      '44 student
+      If ListBox1.Value = "Cess Zayelt, 2015_44" Then
+        student = Application.WorksheetFunction.Average(Range("I346:I353"))
+        MsgBox "Cess Zayelt's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '45 student
+      If ListBox1.Value = "Agnook Tiovata, 2015_45" Then
+        student = Application.WorksheetFunction.Average(Range("I354:I361"))
+        MsgBox "Agnook Tiovata's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '46 student
+      If ListBox1.Value = "Dodge Jantsk, 2015_46" Then
+        student = Application.WorksheetFunction.Average(Range("I362:I369"))
+        MsgBox "Dodge Jantsk's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '47 student
+      If ListBox1.Value = "Ghent Taurendil, 2015_47" Then
+        student = Application.WorksheetFunction.Average(Range("I370:I377"))
+        MsgBox "Ghent Taurendil's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '48 student
+      If ListBox1.Value = "Shass Major, 2015_48" Then
+        student = Application.WorksheetFunction.Average(Range("I378:I385"))
+        MsgBox "Shass Major's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '49 student
+      If ListBox1.Value = "Anjylle Ullto, 2015_49" Then
+        student = Application.WorksheetFunction.Average(Range("I386:I393"))
+        MsgBox "Anjylle Ullto's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+      
+      '50 student
+      If ListBox1.Value = "Sim Ashen, 2015_50" Then
+        student = Application.WorksheetFunction.Average(Range("I394:I401"))
+        MsgBox "Sim Ashen's Final Exam Average for all 8 courses is " & student & "% ."
+      End If
+
+
+End Sub
+
+Private Sub CommandButton2_Click()
+    Unload Me 'if they click cancel hide userform
+End Sub
+
+Private Sub UserForm_QueryClose(cancel As Integer, CloseMode As Integer)
+   If CloseMode = vbFormControlMenu Then CommandButton2_Click 'close userform
+End Sub
+Private Sub UserForm_Initialize()
+
+'add students to listbox, hardcoded into listbox1 because it is easier
+Me.ListBox1.AddItem "Syrena Endivain, 2015_1"
+Me.ListBox1.AddItem "Kahar Donos, 2015_2"
+Me.ListBox1.AddItem "Zae Kaiser, 2015_3"
+Me.ListBox1.AddItem "Koro Magre, 2015_4"
+Me.ListBox1.AddItem "Lenders Turon, 2015_5"
+Me.ListBox1.AddItem "Mala Varless, 2015_6"
+Me.ListBox1.AddItem "Jag Nafeel, 2015_7"
+Me.ListBox1.AddItem "Innoruuk Finn, 2015_8"
+Me.ListBox1.AddItem "Keever Phrog, 2015_9"
+Me.ListBox1.AddItem "Kaarl Nooram, 2015_10"
+Me.ListBox1.AddItem "Tomas Pescer, 2015_11"
+Me.ListBox1.AddItem "Irizon Exibil, 2015_12"
+Me.ListBox1.AddItem "Allen Bernard, 2015_13"
+Me.ListBox1.AddItem "Strilath Mnaa, 2015_14"
+Me.ListBox1.AddItem "Tomara Yavoog, 2015_15"
+
+Me.ListBox1.AddItem "Adoniram Vadith, 2015_16"
+Me.ListBox1.AddItem "Braganti Sudime, 2015_17"
+
+Me.ListBox1.AddItem "Oren Haruhana 2015_18"
+Me.ListBox1.AddItem "Reiko Erelen, 2015_19"
+Me.ListBox1.AddItem "Jakuu Hawkes, 2015_20"
+Me.ListBox1.AddItem "Tifa Nere, 2015_21"
+Me.ListBox1.AddItem "Adan Mackali, 2015_22"
+Me.ListBox1.AddItem "Del-Nara Cardan, 2015_23"
+Me.ListBox1.AddItem "Xerda Duann, 2015_24"
+Me.ListBox1.AddItem "Lila Bintaghr, 2015_25"
+Me.ListBox1.AddItem "Noah Rohtul, 2015_26"
+Me.ListBox1.AddItem "Yiukie Eronoss, 2015_27"
+Me.ListBox1.AddItem "Kai Dalgas, 2015_28"
+Me.ListBox1.AddItem "Tobian Tarmin, 2015_29"
+Me.ListBox1.AddItem "Gaeton Lerann, 2015_30"
+Me.ListBox1.AddItem "Montross Anarth, 2015_31"
+Me.ListBox1.AddItem "Karn Tong, 2015_32"
+Me.ListBox1.AddItem "Tendra Olgad, 2015_33"
+Me.ListBox1.AddItem "Ara Zerga, 2015_34"
+Me.ListBox1.AddItem "Ubinaarisan Shaknaw, 2015_35"
+Me.ListBox1.AddItem "Tarash Selkayim, 2015_36"
+Me.ListBox1.AddItem "Shivas Leqarna, 2015_37"
+Me.ListBox1.AddItem "Akana Morrow, 2015_38"
+Me.ListBox1.AddItem "Kristofer Kriek Kolbrun, 2015_39"
+Me.ListBox1.AddItem "Roth We, 2015_40"
+Me.ListBox1.AddItem "Roy Starwalker, 2015_41"
+Me.ListBox1.AddItem "Dorn Shysha, 2015_42"
+Me.ListBox1.AddItem "Karva Shapris, 2015_43"
+Me.ListBox1.AddItem "Cess Zayelt, 2015_44"
+Me.ListBox1.AddItem "Agnook Tiovata, 2015_45"
+Me.ListBox1.AddItem "Dodge Jantsk, 2015_46"
+Me.ListBox1.AddItem "Ghent Taurendil, 2015_47"
+Me.ListBox1.AddItem "Shass Major, 2015_48"
+Me.ListBox1.AddItem "Anjylle Ullto, 2015_49"
+Me.ListBox1.AddItem "Sim Ashen, 2015_50"
+End Sub
+
+
+
+
