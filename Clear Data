@@ -1,0 +1,11 @@
+Option Explicit
+
+Sub Clear()
+'make a clear button to erase all the data from the data worksheet
+With Worksheets("Data")
+    If WorksheetFunction.count(ActiveSheet.UsedRange) Then
+    Cells.Clear
+    End If
+End With
+
+End Sub
