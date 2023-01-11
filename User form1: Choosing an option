@@ -1,0 +1,33 @@
+Option Explicit
+
+
+
+Private Sub CommandButton1_Click()
+UserForm1.Hide
+
+With Worksheets("Data")
+'if the user chooses the student final exam average button, show userform2 so they can select a student
+    If OptionButton2.Value = True And WorksheetFunction.count(ActiveSheet.UsedRange) = 0 Then
+        MsgBox "Please select the import data by student option button on the userform before selecting this button.", vbInformation
+    
+    ElseIf OptionButton2.Value = True And Not WorksheetFunction.count(ActiveSheet.UsedRange) = 0 Then
+        UserForm2.Show
+    End If
+End With
+'this is error handling because if the user selects the final exam average button without selecting the import data by student button,
+'then a message box appears asking the user to select the import data by student first
+
+
+
+End Sub
+
+Private Sub CommandButton2_Click()
+Unload Me 'get userform to dissapear
+End Sub
+
+
+
+Private Sub UserForm_QueryClose(cancel As Integer, CloseMode As Integer)
+   If CloseMode = vbFormControlMenu Then CommandButton2_Click
+End Sub
+
