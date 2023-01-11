@@ -1,0 +1,372 @@
+Option Explicit
+Sub Main()
+'when user presses button show userform1
+    UserForm1.Show
+    
+    'declare variables for all subs, some in other subs due to modular programming
+    Dim cn As New ADODB.Connection
+    Dim ID As Integer
+    Dim CourseCode As String
+    Dim studentID As String
+    Dim A1 As Integer
+    Dim A2 As Integer
+    Dim A3 As Integer
+    Dim A4 As Integer
+    Dim Midterm As Integer
+    Dim Final As Integer
+    Dim FName As String
+    Dim LName As String
+    Dim Wsheet As Worksheet
+    Dim wsExists As Boolean
+    Dim count As Integer
+    
+    'make a boolean and loop through the worksheets in the workbook to make sure they are no duplicates
+    'this will be helpful to use this boolean in error handling so the user knows when the click what option button on userform1
+    
+    'course worksheet must be present before user chooses display course average button, why boolean is helpful
+    For count = 1 To Worksheets.count
+    If Worksheets(count).Name = "Course" Then
+        wsExists = True
+    End If
+    Next count
+        
+    'connect to the database
+    With cn
+        .ConnectionString = "Data Source=" & ThisWorkbook.Path & "\Registrar.mdb"
+        .Provider = "Microsoft.ACE.OLEDB.12.0"
+        .Open
+    End With
+    
+    'lots of modular programming, all below subs are called in the main sub for when each option button on userform1 is selected
+    
+    
+    'if user chooses import data button, data from grades,students table will display on sheet
+    If UserForm1.OptionButton1 = True Then
+        Call Datum(cn, ID, CourseCode, studentID, A1, A2, A3, A4, Midterm, Final, FName, LName)
+    End If
+    'if they press that button then call sub that gets data from database and puts it on a new sheet called Course, by order course
+    On Error GoTo continue 'if they try to add the course sheet again, error handling
+    
+    If UserForm1.OptionButton4 = True Then
+        Set Wsheet = ThisWorkbook.Sheets.Add(After:=ThisWorkbook.Sheets("Data"))
+        Wsheet.Name = "Course"
+        Call Course(cn, ID, CourseCode, studentID, A1, A2, A3, A4, Midterm, Final, FName, LName)
+    End If
+    
+    'Call course exam average sub if the user clicks the exam average button on userform1, this sub already creates a new sheet
+    
+    'error handling for the exam average worksheet, if they try to press that button again, remind the user that worksheet already exists
+    On Error GoTo notAgain
+    
+    If UserForm1.OptionButton5 = True And wsExists = True Then
+        Call CourseExamAverage
+        ElseIf wsExists = False And UserForm1.OptionButton5 = True Then
+        'make sure the user has chosen the import data by course button before selecting course exam average, otherwise final exam average button will not work
+        MsgBox " Please select the import data by course option button before selecting the final exam average button", vbInformation
+    End If
+    
+    'if the user selects the option button to generate report, call the wordDoc sub
+    If UserForm1.OptionButton3 = True Then
+        Call wordDoc
+    End If
+    
+    'error handlinf exceptions to go to if they do cause an error in the application
+    Exit Sub
+continue:
+    MsgBox "You have already imported this worksheet", vbCritical
+Exit Sub
+notAgain:
+    MsgBox "You have already imported this worksheet", vbCritical
+    ' Close connection to database
+    cn.Close
+    Set cn = Nothing
+    
+
+
+End Sub
+'the subs Datum and Courses are the same, only change is the SQL statements to change the order of how to data is formatted on the sheet
+
+
+Sub Datum(cn As ADODB.Connection, ID As Integer, studentID As String, CourseCode As String, A1 As Integer, A2 As Integer, A3 As Integer, A4 As Integer, Midterm As Integer, Final As Integer, FName As String, LName As String)
+    Dim record As New ADODB.Recordset
+    Dim SQL As String
+    Dim RowC As Integer
+    
+    ' SQL statement that gets data from grades table on database
+    SQL = "SELECT * FROM grades "
+     
+    'Add titles, open the record
+    With record
+        .Open SQL, cn
+        RowC = 1
+        'header titles to the sheet for each field
+        Range("A1").Value = ("ID")
+        Range("B1").Value = ("Course")
+        Range("C1").Value = ("StudentID")
+        Range("D1").Value = ("A1")
+        Range("E1").Value = ("A2")
+        Range("F1").Value = ("A3")
+        Range("G1").Value = ("A4")
+        Range("H1").Value = ("MidTerm")
+        Range("I1").Value = ("Final")
+        Range("J1").Value = ("First Name")
+        Range("K1").Value = ("Last Name")
+    
+        'this loop will get each field from database
+        Do While Not .EOF
+            RowC = RowC + 1
+            Cells(RowC, 1).Value = .Fields("ID")
+            Cells(RowC, 2).Value = .Fields("course")
+            Cells(RowC, 3).Value = .Fields("studentID") 'while the file is not empty, loop through and copy all the fields to the sheet
+            Cells(RowC, 4).Value = .Fields("A1")
+            Cells(RowC, 5).Value = .Fields("A2")
+            Cells(RowC, 6).Value = .Fields("A3")
+            Cells(RowC, 7).Value = .Fields("A4")
+            Cells(RowC, 8).Value = .Fields("MidTerm")
+            Cells(RowC, 9).Value = .Fields("Exam")
+            
+            .MoveNext
+        Loop
+        .Close
+    End With
+    
+    'make another SQL to get the first and last names from the students table, join it to grades table using student id field
+    SQL = "SELECT S.* FROM students AS S INNER JOIN grades AS G ON S.studentID = G.studentID;"
+    
+    With record
+        .Open SQL, cn
+        RowC = 1
+        'adding the fields data from students table to the excel sheet
+        Do While Not .EOF
+            RowC = RowC + 1
+            Cells(RowC, 10).Value = .Fields("FirstName")
+            Cells(RowC, 11).Value = .Fields("LastName")
+            .MoveNext
+        Loop
+        
+        Worksheets("Data").Range("A:K").Columns.AutoFit 'autofit the columns to fit the data
+        .Close
+    End With
+    
+    
+    Set record = Nothing
+End Sub
+
+
+
+
+Sub Course(cn As ADODB.Connection, ID As Integer, studentID As String, CourseCode As String, A1 As Integer, A2 As Integer, A3 As Integer, A4 As Integer, Midterm As Integer, Final As Integer, FName As String, LName As String)
+    Dim record As New ADODB.Recordset
+    Dim SQL As String
+    Dim RowC As Integer
+    
+    ' SQL statement that gets data from grades table on database
+    SQL = "SELECT * FROM grades ORDER BY course"
+     
+    'Add titles, open the record
+    With record
+        .Open SQL, cn
+        RowC = 1
+        'header titles to the sheet for each field from the database
+        Range("A1").Value = ("ID")
+        Range("B1").Value = ("Course")
+        Range("C1").Value = ("StudentID")
+        Range("D1").Value = ("A1")
+        Range("E1").Value = ("A2")
+        Range("F1").Value = ("A3")
+        Range("G1").Value = ("A4")
+        Range("H1").Value = ("MidTerm")
+        Range("I1").Value = ("Final")
+        Range("J1").Value = ("First Name")
+        Range("K1").Value = ("Last Name")
+    
+        'this loop will get each field from database
+        Do While Not .EOF
+            RowC = RowC + 1
+            Cells(RowC, 1).Value = .Fields("ID")
+            Cells(RowC, 2).Value = .Fields("course")
+            Cells(RowC, 3).Value = .Fields("studentID") 'while the file is not empty, loop through and copy all the fields and add it to the sheet
+            Cells(RowC, 4).Value = .Fields("A1")
+            Cells(RowC, 5).Value = .Fields("A2")
+            Cells(RowC, 6).Value = .Fields("A3")
+            Cells(RowC, 7).Value = .Fields("A4")
+            Cells(RowC, 8).Value = .Fields("MidTerm")
+            Cells(RowC, 9).Value = .Fields("Exam")
+            
+            .MoveNext
+        Loop
+        .Close
+    End With
+    
+    'make another SQL to get the first and last names from the students table, join it to grades table using student id field
+    'order by courses this time to set data up for histogram
+    SQL = "SELECT S.* FROM students AS S INNER JOIN grades AS G ON S.studentID = G.studentID ORDER BY G.course;"
+    
+    With record
+        .Open SQL, cn
+        RowC = 1
+        'adding the fields data from students table to the excel sheet
+        Do While Not .EOF
+            RowC = RowC + 1
+            Cells(RowC, 10).Value = .Fields("FirstName")
+            Cells(RowC, 11).Value = .Fields("LastName")
+            .MoveNext
+        Loop
+        
+        Worksheets("Data").Range("A:K").Columns.AutoFit 'autofit the columns to fit the data
+        .Close
+    End With
+    
+    
+    Set record = Nothing
+End Sub
+
+Sub CourseExamAverage()
+    Dim AvgAS101 As Double
+    Dim AvgCP102 As Double
+    Dim AvgCP104 As Double
+    Dim AvgCP212 As Double
+    Dim AvgCP411 As Double
+    Dim AvgPC120 As Double
+    Dim AvgPC131 As Double
+    Dim AvgPC141 As Double
+    Dim ws As Worksheet
+    Dim stDevi As Double
+    
+    
+    'create a new worksheet to display the exam average scores per course
+    Set ws = ThisWorkbook.Sheets.Add(After:=ThisWorkbook.Sheets("Course"))
+    ws.Name = "ExamAverages" 'name the worksheet
+    
+    'find the average of the final exam scores for each course
+    'now that data is ordered by course i can just use excel average function to calculate the final exam average for each course
+ 
+        AvgAS101 = Application.WorksheetFunction.Average(Worksheets("Course").Range("I2:I51"))
+        AvgCP102 = Application.WorksheetFunction.Average(Worksheets("Course").Range("I52:I101"))
+        AvgCP104 = Application.WorksheetFunction.Average(Worksheets("Course").Range("I102:I151"))
+        AvgCP212 = Application.WorksheetFunction.Average(Worksheets("Course").Range("I152:I201"))
+        AvgCP411 = Application.WorksheetFunction.Average(Worksheets("Course").Range("I202:I251"))
+        AvgPC120 = Application.WorksheetFunction.Average(Worksheets("Course").Range("I252:I301"))
+        AvgPC131 = Application.WorksheetFunction.Average(Worksheets("Course").Range("I302:I351"))
+        AvgPC141 = Application.WorksheetFunction.Average(Worksheets("Course").Range("I352:I401"))
+        
+        'put standard deviation of course averages on to the worksheet for the report
+        stDevi = Application.WorksheetFunction.stDev(Worksheets("Chart").Range("B2:B9"))
+        
+    
+    'calculates the average of the final exam column on the course page
+    'put all the averages on a new worksheet
+    
+    
+    'first, add titles and hardcode column A with the names of the courses
+    With ws.Range("A1")
+        .Value = "Course"
+    End With
+    
+    With ws.Range("A2")
+        .Value = "AS101"
+    End With
+    
+    With ws.Range("A3")
+        .Value = "CP102"
+    End With
+    
+    With ws.Range("A4")
+        .Value = "CP104"
+    End With
+    
+    With ws.Range("A5")
+        .Value = "CP212"
+    End With
+    
+    With ws.Range("A6")
+        .Value = "CP411"
+    End With
+    
+    With ws.Range("A7")
+        .Value = "PC120"
+    End With
+    
+      
+    With ws.Range("A8")
+        .Value = "PC131"
+    End With
+    
+      
+    With ws.Range("A9")
+        .Value = "PC141"
+    End With
+    
+    'code the averages in the new worksheet in column B besides its corresponding
+        With ws.Range("B1")
+            .Value = "Final Exam Average"
+        End With
+        
+        With ws.Range("B2")
+            .Value = AvgAS101
+        End With
+        
+        With ws.Range("B3")
+            .Value = AvgCP102
+        End With
+       
+        With ws.Range("B4")
+            .Value = AvgCP104
+        End With
+        With ws.Range("B5")
+            .Value = AvgCP212
+        End With
+        
+        With ws.Range("B6")
+            .Value = AvgCP411
+        End With
+        
+        With ws.Range("B7")
+            .Value = AvgPC120
+        End With
+        
+        With ws.Range("B8")
+            .Value = AvgPC131
+        End With
+        
+        With ws.Range("B9")
+            .Value = AvgPC141
+        End With
+        
+        'add the standard deviation of course final exam grades to this worksheet
+        With ws.Range("A11")
+            .Value = "Standard Deviation for Exam Grades"
+        End With
+        
+        With ws.Range("E11")
+            .Value = stDevi
+        End With
+        
+
+End Sub
+
+Sub wordDoc()
+
+'select the range with the chart and data on the chart worksheet
+Worksheets("Chart").Range("A1:L35").Copy
+
+'make a word application object and set it to a new word application
+Dim wdApp As Word.Application
+Set wdApp = New Word.Application
+
+'declare a word document and create it
+Dim wdDoc As Word.Document
+Set wdDoc = wdApp.Documents.Add
+
+'make a word range to put all data on to
+Dim wordR As Word.Range
+
+'activate word document and paste the contents from chart worksheet to word document
+wdDoc.Activate
+wdDoc.Range.Paste
+
+'make the application visible to user
+Application.CutCopyMode = False
+wdApp.Visible = True
+    
+End Sub
